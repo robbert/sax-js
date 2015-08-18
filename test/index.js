@@ -3,7 +3,8 @@ var globalsBefore = JSON.stringify(Object.keys(global))
   , assert = require("assert")
   , fs = require("fs")
   , path = require("path")
-  , sax = require("../lib/sax")
+  // , sax = require("../lib/sax")
+  sax = require("../../../../sonos/tmp/nih-sax-stream.js").sax
 
 exports.sax = sax
 
@@ -62,10 +63,12 @@ if (module === require.main) {
     var n = files.length
       , i = 0
     console.log("0.." + n)
+    files = ['xmlns-strict.js']
     files.forEach(function (file) {
       // run this test.
       try {
         require(path.resolve(__dirname, file))
+        /*
         var globalsAfter = JSON.stringify(Object.keys(global))
         if (globalsAfter !== globalsBefore) {
           var er = new Error("new globals introduced\n"+
@@ -74,6 +77,7 @@ if (module === require.main) {
           globalsBefore = globalsAfter
           throw er
         }
+        */
         console.log("ok " + (++i) + " - " + file)
       } catch (er) {
         console.log("not ok "+ (++i) + " - " + file)
